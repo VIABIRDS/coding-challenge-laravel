@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ScoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ScoreController::class, 'index']);
+
+Route::middleware(['protectedResource'])
+    ->post('/api/score', [ScoreController::class, 'submitScore'])
+    ->name('submitScore');
+
+
